@@ -46,19 +46,19 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 
-st.title(" Traductor Estelar ✨")
+st.title("Traductor Estelar ✨")
 st.subheader("🎧 Escucho lo que deseas traducir desde las estrellas")
 
 
-image = Image.open('estrella.png')  
+image = Image.open('OIG7.jpg')  
 st.image(image, width=300)
 
 with st.sidebar:
     st.subheader("🚀 Traductor Estelar")
-    st.write("🌙 Presiona el botón, cuando escuches la señal, habla lo que quieres traducir, luego selecciona el idioma de entrada y salida.")
+    st.write(" Presiona el botón, cuando escuches la señal, habla lo que quieres traducir, luego selecciona el idioma de entrada y salida.")
 
 
-st.write("Toca el botón y habla lo que quieres traducir. Las estrellas te guiarán")
+st.write(" Toca el botón y habla lo que quieres traducir. Las estrellas te guiarán")
 
 
 stt_button = Button(label="🎤 Escuchar", width=300, height=50)
@@ -96,19 +96,19 @@ if result:
     if "GET_TEXT" in result:
         st.write(result.get("GET_TEXT"))
     
-
+  
     try:
         os.mkdir("temp")
     except:
         pass
     
-    st.title("🌟 Texto a Audio Estelar 🎶")
+    st.title("🌟 Texto a Audio Estelar ")
     translator = Translator()
     
-
+   
     text = str(result.get("GET_TEXT"))
     
-
+  
     in_lang = st.selectbox(
         "🌍 Selecciona el lenguaje de entrada",
         ("Inglés", "Español", "Bengali", "Coreano", "Mandarín", "Japonés"),
@@ -128,7 +128,7 @@ if result:
         input_language = "ja"
     
     out_lang = st.selectbox(
-        "Selecciona el lenguaje de salida",
+        "🌟 Selecciona el lenguaje de salida",
         ("Inglés", "Español", "Bengali", "Coreano", "Mandarín", "Japonés"),
     )
     
@@ -145,7 +145,7 @@ if result:
     elif out_lang == "Japonés":
         output_language = "ja"
     
-
+ 
     english_accent = st.selectbox(
         "Selecciona el acento",
         (
@@ -160,7 +160,7 @@ if result:
         ),
     )
     
-    # Asignación de TLD para el acento
+  
     if english_accent == "Defecto":
         tld = "com"
     elif english_accent == "Español":
@@ -178,7 +178,7 @@ if result:
     elif english_accent == "Sudáfrica":
         tld = "co.za"
     
-
+  
     def text_to_speech(input_language, output_language, text, tld):
         translation = translator.translate(text, src=input_language, dest=output_language)
         trans_text = translation.text
@@ -196,16 +196,25 @@ if result:
         result, output_text = text_to_speech(input_language, output_language, text, tld)
         audio_file = open(f"temp/{result}.mp3", "rb")
         audio_bytes = audio_file.read()
-        st.markdown(f"🎶 **Tu audio:**")
+        st.markdown(f" **Tu audio:**")
         st.audio(audio_bytes, format="audio/mp3", start_time=0)
     
         if display_output_text:
             st.markdown(f"🌟 **Texto de salida:**")
             st.write(f" {output_text}")
     
-    # Función para eliminar ar
+   
+    def remove_files(n):
+        mp3_files = glob.glob("temp/*mp3")
+        if len(mp3_files) != 0:
+            now = time.time()
+            n_days = n * 86400
+            for f in mp3_files:
+                if os.stat(f).st_mtime < now - n_days:
+                    os.remove(f)
+                    print("Deleted ", f)
 
-        
-    
+    remove_files(7)
+
 
 
