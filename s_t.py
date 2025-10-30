@@ -50,7 +50,7 @@ st.title("Traductor Estelar ✨")
 st.subheader("🎧 Escucho lo que deseas traducir desde las estrellas")
 
 
-image = Image.open('OIG7.jpg')  
+image = Image.open('estrella.png')  
 st.image(image, width=300)
 
 with st.sidebar:
