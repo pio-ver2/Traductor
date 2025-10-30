@@ -14,7 +14,7 @@ from googletrans import Translator
 st.markdown("""
     <style>
         body {
-            background-color: #2a3d66;  /* Fondo oscuro con toque estelar */
+            background-color: #87CEFA;  /* Fondo celeste */
             color: #ffffff;  /* Texto blanco */
         }
         .stTitle {
